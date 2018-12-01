@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .wrap{
+        width:500px;
+        margin:40px auto;
+    }
+    .wrap span{
+        display:inline-block;
+        width:50px;
+        height:36px;
+        margin:5px;
+        background:url("images/star.png") 0 0px/50px 92px no-repeat;
+    }
+    .wrap .active{
+        background-position:0 -55px;
+    }
+    .wrap .box{
+        width:319px;
+        
+    }
+</style>
+<body>
+    <div class="wrap">
+        <p>请对本次服务评价,五星好评哦</p>
+        <div class="box">
+            <span ></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script>//-55px
+        let Star = document.querySelectorAll(".wrap span"),
+            len = Star.length,
+            oBox = document.getElementsByClassName("box")[0],
+            count = -1;
+            for(let i=0; i<len; i++){
+                Star[i].onclick = function(){//点击
+                count = i;//用来记录点击了第几个，就代表那个数，
+                    for(let j=0;j<len;j++){
+                        if(j <= i){
+                            Star[j].classList.add("active");
+                        }else{
+                            Star[j].classList.remove("active");
+        
+                        }
+                    }
+                }
+                Star[i].onmouseenter = function(){//移入
+                    for(let j=0;j<len;j++){
+                        if(j <= i){
+                            Star[j].classList.add("active");
+                        }else{
+                            Star[j].classList.remove("active");
+                        }
+                    }
+                }
+               
+                oBox.onmouseleave = function(){//移出，移出的时候写个for循环让这个变量和刚刚点击记录下来的数字进行比较那个数字之前的就亮着，之后的都暗了
+                    for(let c = 0; c<len; c++){
+                        if(c <= count){
+                            Star[c].classList.add("active");
+                        }else{
+                            Star[c].classList.remove("active");
+                        }
+                    }
+                }
+            }
+            
+    </script>        
+</body>
+</html>
